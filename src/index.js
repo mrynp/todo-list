@@ -9,7 +9,7 @@ function Todo(title, status) {
 
 function addToTodoList(title, status) {
   todoList.push(new Todo(title, status));
-  displayTodo;
+  displayTodo();
 }
 
 function displayNav() {
@@ -27,35 +27,59 @@ function displayNav() {
   return nav;
 }
 
-function displayTodo() {
+function displayTodoContainer() {
   const todoContainer = document.createElement("div");
   todoContainer.classList.add("todo-container");
 
-  const todoTitle = document.createElement("h1");
-  todoTitle.textContent = "Todo Today";
+  const todoHeader = document.createElement("h1");
+  todoHeader.textContent = "Todo Today";
 
-  const todoListContainer = document.createElement("div");
+  const form = document.createElement("form");
+  const todoTitle = document.createElement("input");
+  todoTitle.type = "text";
+  todoTitle.name = "title";
+  todoTitle.placeholder = "Add a to-do";
+
+  const addButton = document.createElement("button");
+  addButton.type = "submit";
+  addButton.textContent = "Add";
+
+  form.appendChild(todoTitle);
+  form.appendChild(addButton);
+
+  const todoListContainer = document.createElement("ul");
   todoListContainer.classList.add("todo-list-container");
-  todoListContainer.innerHTML = "";
 
-  todoList.forEach((todo, index) => {
-    const div = document.createElement("div");
-    div.className = "todo";
-    div.innerHTML = `<p class="todo-title">${todo.title}</p>`;
-
-    todoListContainer.appendChild(div);
-  });
-
-  todoContainer.appendChild(todoTitle);
+  todoContainer.appendChild(todoHeader);
   todoContainer.appendChild(todoListContainer);
+  todoContainer.appendChild(form);
 
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const title = formData.get("title");
+    const status = false;
+
+    addToTodoList(title, status);
+    form.reset();
+  });
   return todoContainer;
+}
+
+function displayTodo() {
+  const todoListContainer = document.querySelector(".todo-list-container");
+  todoListContainer.innerHTML = "";
+  todoList.forEach((todo) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<p class="todo-title">${todo.title}</p>`;
+    todoListContainer.appendChild(li);
+  });
 }
 
 function displayTodoApp() {
   const main = document.createElement("main");
   const nav = displayNav();
-  const todoContainer = displayTodo();
+  const todoContainer = displayTodoContainer();
 
   main.appendChild(nav);
   main.appendChild(todoContainer);
@@ -63,6 +87,6 @@ function displayTodoApp() {
   document.body.appendChild(main);
 }
 
+displayTodoApp();
 addToTodoList("read book", false);
 addToTodoList("walk the dog", false);
-displayTodoApp();
