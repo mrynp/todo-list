@@ -82,14 +82,23 @@ function displayTodo() {
     checkbox.addEventListener("change", () => {
       todo.status = checkbox.checked;
       updateTodoList(index, todo.status);
-      console.log(`Todo "${todo.title}" status: ${todo.status}`);
     });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "delete";
+    deleteBtn.className = "delete";
+
+    deleteBtn.addEventListener("click", () => {
+      deleteTodo(index);
+    });
+
     const title = document.createElement("p");
     title.className = "todo-title";
     title.textContent = todo.title;
 
     div.appendChild(checkbox);
     div.appendChild(title);
+    div.appendChild(deleteBtn);
     todoListContainer.appendChild(div);
   });
 }
@@ -98,6 +107,11 @@ function updateTodoList(index, status) {
   if (todoList[index]) {
     todoList[index].status = status;
   }
+}
+
+function deleteTodo(index) {
+  todoList.splice(index, 1);
+  displayTodo();
 }
 
 function displayTodoApp() {
