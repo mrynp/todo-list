@@ -2,7 +2,7 @@ import "./styles.css";
 
 const todoList = [];
 
-function Todo(title, status) {
+function Todo(title, status = false) {
   this.title = title;
   this.status = status;
 }
@@ -77,10 +77,11 @@ function displayTodo() {
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.check = todo.status;
+    checkbox.checked = todo.status;
 
     checkbox.addEventListener("change", () => {
       todo.status = checkbox.checked;
+      updateTodoList(index, todo.status);
       console.log(`Todo "${todo.title}" status: ${todo.status}`);
     });
     const title = document.createElement("p");
@@ -91,6 +92,12 @@ function displayTodo() {
     div.appendChild(title);
     todoListContainer.appendChild(div);
   });
+}
+
+function updateTodoList(index, status) {
+  if (todoList[index]) {
+    todoList[index].status = status;
+  }
 }
 
 function displayTodoApp() {
