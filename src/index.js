@@ -39,6 +39,7 @@ function displayTodoContainer() {
   todoTitle.type = "text";
   todoTitle.name = "title";
   todoTitle.placeholder = "Add a to-do";
+  todoTitle.required = true;
 
   const addButton = document.createElement("button");
   addButton.type = "submit";
@@ -47,7 +48,7 @@ function displayTodoContainer() {
   form.appendChild(todoTitle);
   form.appendChild(addButton);
 
-  const todoListContainer = document.createElement("ul");
+  const todoListContainer = document.createElement("div");
   todoListContainer.classList.add("todo-list-container");
 
   todoContainer.appendChild(todoHeader);
@@ -69,10 +70,26 @@ function displayTodoContainer() {
 function displayTodo() {
   const todoListContainer = document.querySelector(".todo-list-container");
   todoListContainer.innerHTML = "";
-  todoList.forEach((todo) => {
-    const li = document.createElement("li");
-    li.innerHTML = `<p class="todo-title">${todo.title}</p>`;
-    todoListContainer.appendChild(li);
+
+  todoList.forEach((todo, index) => {
+    const div = document.createElement("div");
+    div.className = "todo";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.check = todo.status;
+
+    checkbox.addEventListener("change", () => {
+      todo.status = checkbox.checked;
+      console.log(`Todo "${todo.title}" status: ${todo.status}`);
+    });
+    const title = document.createElement("p");
+    title.className = "todo-title";
+    title.textContent = todo.title;
+
+    div.appendChild(checkbox);
+    div.appendChild(title);
+    todoListContainer.appendChild(div);
   });
 }
 
