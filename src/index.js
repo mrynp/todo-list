@@ -21,6 +21,8 @@ function displayNav() {
   const todoAll = document.createElement("button");
   todoAll.textContent = "All tasks";
 
+  todoAll.addEventListener("click", displayAllTodo);
+
   const todoToday = document.createElement("button");
   todoToday.textContent = "Today's tasks";
 
@@ -155,6 +157,48 @@ function displayTodo() {
     div.appendChild(deleteBtn);
     todoListContainer.appendChild(div);
   });
+}
+
+function displayAllTodo() {
+  const todoListContainer = document.querySelector(".todo-list-container");
+  const todoHeader = document.querySelector(".todo-container h1");
+
+  todoHeader.textContent = "All Todos";
+
+  todoListContainer.innerHTML = "";
+
+  for (const [projectName, todos] of Object.entries(projects)) {
+    todos.forEach((todo, index) => {
+      const div = document.createElement("div");
+      div.className = "todo";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = todo.status;
+
+      checkbox.addEventListener("change", () => {
+        todo.status = checkbox.checked;
+        updateTodoList(index, todo.status);
+      });
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "delete";
+      deleteBtn.className = "delete";
+
+      deleteBtn.addEventListener("click", () => {
+        deleteTodo(index);
+      });
+
+      const title = document.createElement("p");
+      title.className = "todo-title";
+      title.textContent = todo.title;
+
+      div.appendChild(checkbox);
+      div.appendChild(title);
+      div.appendChild(deleteBtn);
+      todoListContainer.appendChild(div);
+    });
+  }
 }
 
 function updateTodoList(index, status) {
