@@ -24,6 +24,11 @@ function displayNav() {
   const todoToday = document.createElement("button");
   todoToday.textContent = "Today's tasks";
 
+  todoToday.addEventListener("click", () => {
+    currentProject = "Today";
+    displayTodo();
+  });
+
   const form = document.createElement("form");
   const project = document.createElement("input");
   project.type = "text";
@@ -38,14 +43,6 @@ function displayNav() {
   form.appendChild(project);
   form.appendChild(addButton);
 
-  // const projectInput = document.createElement("input");
-  // projectInput.type = "text";
-  // projectInput.placeholder = "Add new project";
-  // projectInput.className = "project-input";
-
-  // const addProjectButton = document.createElement("button");
-  // addProjectButton.textContent = "Add Project";
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -59,22 +56,10 @@ function displayNav() {
     form.reset();
   });
 
-  // addProjectButton.addEventListener("click", () => {
-  //   const projectName = projectInput.value.trim();
-  //   if (projectName && !projects[projectName]) {
-  //     projects[projectName] = [];
-  //     const projectButton = createProjectButton(projectName);
-  //     nav.appendChild(projectButton);
-  //     projectInput.value = "";
-  //   }
-  // });
-
   projectsContainer.appendChild(todoToday);
   nav.appendChild(todoAll);
   nav.appendChild(projectsContainer);
   nav.appendChild(form);
-  // nav.appendChild(projectInput);
-  // nav.appendChild(addProjectButton);
 
   return nav;
 }
@@ -86,7 +71,6 @@ function createProjectButton(projectName) {
 
   projectButton.addEventListener("click", () => {
     currentProject = projectName;
-
     displayTodo();
   });
 
@@ -135,6 +119,9 @@ function displayTodoContainer() {
 
 function displayTodo() {
   const todoListContainer = document.querySelector(".todo-list-container");
+  const todoHeader = document.querySelector(".todo-container h1");
+
+  todoHeader.textContent = `${currentProject} Todo List`;
 
   todoListContainer.innerHTML = "";
 
