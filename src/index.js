@@ -176,9 +176,12 @@ function displayAllTodo() {
       checkbox.type = "checkbox";
       checkbox.checked = todo.status;
 
+      // checkbox.addEventListener("change", () => {
+      //   todo.status = checkbox.checked;
+      //   updateTodoList(index, todo.status);
+      // });
       checkbox.addEventListener("change", () => {
-        todo.status = checkbox.checked;
-        updateTodoList(index, todo.status);
+        updateTodoList(index, checkbox.checked, projectName);
       });
 
       const deleteBtn = document.createElement("button");
@@ -186,7 +189,8 @@ function displayAllTodo() {
       deleteBtn.className = "delete";
 
       deleteBtn.addEventListener("click", () => {
-        deleteTodo(index);
+        deleteTodo(index, projectName);
+        displayAllTodo();
       });
 
       const title = document.createElement("p");
@@ -201,15 +205,19 @@ function displayAllTodo() {
   }
 }
 
-function updateTodoList(index, status) {
-  if (projects[currentProject][index]) {
-    projects[currentProject][index].status = status;
+function updateTodoList(index, status, projectName = currentProject) {
+  if (projects[projectName] && projects[projectName][index]) {
+    projects[projectName][index].status = status;
   }
 }
 
-function deleteTodo(index) {
-  projects[currentProject].splice(index, 1);
-  displayTodo();
+function deleteTodo(index, projectName = currentProject) {
+  if (projects[projectName]) {
+    projects[projectName].splice(index, 1);
+  }
+  if (projectName === currentProject) {
+    displayTodo();
+  }
 }
 
 function displayTodoApp() {
