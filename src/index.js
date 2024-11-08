@@ -11,6 +11,10 @@ function Todo(title, status = false) {
 
 function addToTodoList(title, status = false) {
   projects[currentProject].push(new Todo(title, status));
+  if (currentProject === "All Tasks" && projects["Today"]) {
+    projects["Today"].push(new Todo(title, status));
+  }
+
   displayTodo();
 }
 
@@ -176,10 +180,6 @@ function displayAllTodo() {
       checkbox.type = "checkbox";
       checkbox.checked = todo.status;
 
-      // checkbox.addEventListener("change", () => {
-      //   todo.status = checkbox.checked;
-      //   updateTodoList(index, todo.status);
-      // });
       checkbox.addEventListener("change", () => {
         updateTodoList(index, checkbox.checked, projectName);
       });

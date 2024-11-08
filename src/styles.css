@@ -7,24 +7,40 @@
 main {
   display: flex;
   justify-content: space-evenly;
+  background-image: url("./assets/table.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
 
 nav {
+  background-image: url("./assets/texture.jpg");
+  background-size: contain;
+  background-position: center;
+  background-color: rgba(255, 253, 119, 0.2);
+  background-blend-mode: multiply;
   height: 70vh;
   width: 300px;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   padding: 40px 20px;
   margin: 40px 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .todo-container {
-  border: 1px solid #000;
+  background-image: url("./assets/texture.jpg");
+  background-size: contain;
+  background-position: center;
+  /* border: 1px solid #000; */
   width: 980px;
   height: 80vh;
   padding: 40px 20px;
   margin: 40px 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
