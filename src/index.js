@@ -135,13 +135,29 @@ function displayTodo() {
     const div = document.createElement("div");
     div.className = "todo";
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = todo.status;
+    // const checkbox = document.createElement("input");
+    // checkbox.type = "checkbox";
+    // checkbox.checked = todo.status;
 
+    const checkboxWrapper = document.createElement("div");
+    checkboxWrapper.className = "checkbox-wrapper-62";
+    checkboxWrapper.innerHTML = `
+      <input type="checkbox" class="check" id="check-${todo.title}-${index}" ${
+      todo.status ? "checked" : ""
+    } />
+      <label for="check-${todo.title}-${index}" class="label">
+        <svg width="43" height="43" viewBox="0 0 90 90">
+          <rect x="30" y="20" width="50" height="50" stroke="black" fill="none" />
+          <g transform="translate(0,-952.36218)">
+            <path d="m 13,983 c 33,6 40,26 55,48" stroke="black" stroke-width="3" class="path1" fill="none" />
+            <path d="M 75,970 C 51,981 34,1014 25,1031" stroke="black" stroke-width="3" class="path1" fill="none" />
+          </g>
+        </svg>
+      </label>
+    `;
+    const checkbox = checkboxWrapper.querySelector(".check");
     checkbox.addEventListener("change", () => {
-      todo.status = checkbox.checked;
-      updateTodoList(index, todo.status);
+      updateTodoList(index, checkbox.checked);
     });
 
     const deleteBtn = document.createElement("button");
@@ -156,7 +172,7 @@ function displayTodo() {
     title.className = "todo-title";
     title.textContent = todo.title;
 
-    div.appendChild(checkbox);
+    div.appendChild(checkboxWrapper);
     div.appendChild(title);
     div.appendChild(deleteBtn);
     todoListContainer.appendChild(div);
@@ -176,10 +192,24 @@ function displayAllTodo() {
       const div = document.createElement("div");
       div.className = "todo";
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = todo.status;
+      const checkboxWrapper = document.createElement("div");
+      checkboxWrapper.className = "checkbox-wrapper-62";
+      checkboxWrapper.innerHTML = `
+      <input type="checkbox" class="check" id="check-${projectName}-${index}" ${
+        todo.status ? "checked" : ""
+      } />
+      <label for="check-${projectName}-${index}" class="label">
+        <svg width="43" height="43" viewBox="0 0 90 90">
+          <rect x="30" y="20" width="50" height="50" stroke="black" fill="none" />
+          <g transform="translate(0,-952.36218)">
+            <path d="m 13,983 c 33,6 40,26 55,48" stroke="black" stroke-width="3" class="path1" fill="none" />
+            <path d="M 75,970 C 51,981 34,1014 25,1031" stroke="black" stroke-width="3" class="path1" fill="none" />
+          </g>
+        </svg>
+      </label>
+    `;
 
+      const checkbox = checkboxWrapper.querySelector(".check");
       checkbox.addEventListener("change", () => {
         updateTodoList(index, checkbox.checked, projectName);
       });
@@ -187,7 +217,6 @@ function displayAllTodo() {
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "delete";
       deleteBtn.className = "delete";
-
       deleteBtn.addEventListener("click", () => {
         deleteTodo(index, projectName);
         displayAllTodo();
@@ -197,9 +226,10 @@ function displayAllTodo() {
       title.className = "todo-title";
       title.textContent = todo.title;
 
-      div.appendChild(checkbox);
+      div.appendChild(checkboxWrapper);
       div.appendChild(title);
       div.appendChild(deleteBtn);
+
       todoListContainer.appendChild(div);
     });
   }

@@ -2,9 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: "Gaegu", sans-serif; */
   font-family: "Oooh Baby", cursive;
-  /* font-family: "Caveat", cursive; */
 }
 
 main {
@@ -115,4 +113,38 @@ form > button,
   border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
+}
+
+.checkbox-wrapper-62 input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+}
+
+.checkbox-wrapper-62 *,
+.checkbox-wrapper-62 ::after,
+.checkbox-wrapper-62 ::before {
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper-62 {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.checkbox-wrapper-62 .check {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  opacity: 0;
+}
+.checkbox-wrapper-62 .label svg {
+  vertical-align: middle;
+}
+.checkbox-wrapper-62 .path1 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: 0.75s all;
+}
+.checkbox-wrapper-62 .check:checked + label svg g path {
+  stroke-dashoffset: 0;
 }
