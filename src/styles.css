@@ -76,12 +76,14 @@ nav > div > button {
   gap: 10px;
   margin: 5px 0;
   font-size: 28px;
+  align-items: center;
 }
 
 form {
   display: flex;
   flex-direction: row;
   margin: 20px 0;
+  align-items: center;
 }
 
 nav form {
@@ -97,6 +99,7 @@ nav form input {
 
 .todo-container form input {
   font-size: 28px;
+  margin-left: 50px;
 }
 
 form input {
@@ -113,6 +116,10 @@ form > button,
   border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
+}
+
+.delete {
+  margin-left: 20px;
 }
 
 .checkbox-wrapper-62 input[type="checkbox"] {

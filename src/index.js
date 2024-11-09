@@ -44,7 +44,16 @@ function displayNav() {
 
   const addButton = document.createElement("button");
   addButton.type = "submit";
-  addButton.textContent = "Add";
+  addButton.textContent = "add";
+  addButton.style.display = "none";
+
+  project.addEventListener("input", () => {
+    if (project.value.trim()) {
+      addButton.style.display = "block";
+    } else {
+      addButton.style.display = "none";
+    }
+  });
 
   form.appendChild(project);
   form.appendChild(addButton);
@@ -58,7 +67,7 @@ function displayNav() {
       const projectButton = createProjectButton(projectName);
       projectsContainer.appendChild(projectButton);
     }
-
+    addButton.style.display = "none";
     form.reset();
   });
 
@@ -93,12 +102,21 @@ function displayTodoContainer() {
   const todoTitle = document.createElement("input");
   todoTitle.type = "text";
   todoTitle.name = "title";
-  todoTitle.placeholder = "Add a to-do";
+  todoTitle.placeholder = "+ Add a to do";
   todoTitle.required = true;
 
   const addButton = document.createElement("button");
   addButton.type = "submit";
-  addButton.textContent = "Add";
+  addButton.textContent = "add";
+  addButton.style.display = "none";
+
+  todoTitle.addEventListener("input", () => {
+    if (todoTitle.value.trim()) {
+      addButton.style.display = "block";
+    } else {
+      addButton.style.display = "none";
+    }
+  });
 
   form.appendChild(todoTitle);
   form.appendChild(addButton);
@@ -117,7 +135,7 @@ function displayTodoContainer() {
     const status = false;
 
     addToTodoList(title, status);
-
+    addButton.style.display = "none";
     form.reset();
   });
   return todoContainer;
@@ -163,9 +181,17 @@ function displayTodo() {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "delete";
     deleteBtn.className = "delete";
+    deleteBtn.style.display = "none";
 
     deleteBtn.addEventListener("click", () => {
       deleteTodo(index);
+    });
+
+    div.addEventListener("mouseover", function () {
+      deleteBtn.style.display = "block";
+    });
+    div.addEventListener("mouseleave", function () {
+      deleteBtn.style.display = "none";
     });
 
     const title = document.createElement("p");
@@ -217,9 +243,17 @@ function displayAllTodo() {
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "delete";
       deleteBtn.className = "delete";
+
       deleteBtn.addEventListener("click", () => {
         deleteTodo(index, projectName);
         displayAllTodo();
+      });
+
+      div.addEventListener("mouseover", function () {
+        deleteBtn.style.display = "block";
+      });
+      div.addEventListener("mouseleave", function () {
+        deleteBtn.style.display = "none";
       });
 
       const title = document.createElement("p");
