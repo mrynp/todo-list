@@ -65,7 +65,7 @@ function displayNav() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const projectName = formData.get("project");
+    const projectName = capitalizeFirstLetter(formData.get("project"));
     if (!projects[projectName]) {
       projects[projectName] = [];
       const projectButton = createProjectButton(projectName);
@@ -94,7 +94,7 @@ function createProjectButton(projectName) {
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "delete";
-  deleteBtn.className = "delete deleteProject";
+  deleteBtn.className = "delete delete-project";
   deleteBtn.style.display = "none";
 
   projectContainer.addEventListener("mouseover", () => {
@@ -125,6 +125,11 @@ function createProjectButton(projectName) {
   projectContainer.appendChild(deleteBtn);
 
   return projectContainer;
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  // return string.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 function displayTodoContainer() {

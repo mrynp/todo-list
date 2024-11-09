@@ -127,10 +127,15 @@ form > button,
   margin-left: 20px;
 }
 
+.delete-project {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #f6f3d7;
+}
+
 .project-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
 }
 
 .checkbox-wrapper-62 input[type="checkbox"] {
