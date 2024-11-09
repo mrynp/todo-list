@@ -41,8 +41,9 @@ nav > div {
   gap: 14px;
 }
 
-nav > button,
-nav > div > button {
+.all-button,
+.today-button,
+.project-button {
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -93,7 +94,7 @@ nav form {
 }
 
 nav form input {
-  font-size: 20px;
+  font-size: 24px;
   width: 200px;
 }
 
@@ -124,6 +125,12 @@ form > button,
 
 .delete {
   margin-left: 20px;
+}
+
+.project-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .checkbox-wrapper-62 input[type="checkbox"] {

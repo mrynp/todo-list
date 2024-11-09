@@ -23,11 +23,13 @@ function displayNav() {
   const projectsContainer = document.createElement("div");
 
   const todoAll = document.createElement("button");
+  todoAll.className = "all-button";
   todoAll.textContent = "All tasks";
 
   todoAll.addEventListener("click", displayAllTodo);
 
   const todoToday = document.createElement("button");
+  todoToday.className = "today-button";
   todoToday.textContent = "Today's tasks";
 
   todoToday.addEventListener("click", () => {
@@ -83,16 +85,46 @@ function displayNav() {
 }
 
 function createProjectButton(projectName) {
+  const projectContainer = document.createElement("div");
+  projectContainer.className = "project-container";
+
   const projectButton = document.createElement("button");
   projectButton.textContent = projectName;
   projectButton.className = "project-button";
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "delete";
+  deleteBtn.className = "delete deleteProject";
+  deleteBtn.style.display = "none";
+
+  projectContainer.addEventListener("mouseover", () => {
+    deleteBtn.style.display = "block";
+  });
+
+  projectContainer.addEventListener("mouseleave", () => {
+    deleteBtn.style.display = "none";
+  });
 
   projectButton.addEventListener("click", () => {
     currentProject = projectName;
     displayTodo();
   });
 
-  return projectButton;
+  deleteBtn.addEventListener("click", () => {
+    delete projects[projectName];
+
+    if (currentProject === projectName) {
+      currentProject = "Today";
+      displayTodo();
+    }
+
+    projectContainer.remove();
+  });
+
+  projectContainer.appendChild(projectButton);
+  projectContainer.appendChild(deleteBtn);
+
+  return projectContainer;
 }
 
 function displayTodoContainer() {
@@ -249,6 +281,7 @@ function displayAllTodo() {
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "delete";
       deleteBtn.className = "delete";
+      deleteBtn.style.display = "none";
 
       deleteBtn.addEventListener("click", () => {
         deleteTodo(index, projectName);
