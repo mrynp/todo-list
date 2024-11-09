@@ -50,8 +50,10 @@ function displayNav() {
   project.addEventListener("input", () => {
     if (project.value.trim()) {
       addButton.style.display = "block";
+      project.style.borderBottom = "1px solid black";
     } else {
       addButton.style.display = "none";
+      project.style.borderBottom = "none";
     }
   });
 
@@ -68,6 +70,7 @@ function displayNav() {
       projectsContainer.appendChild(projectButton);
     }
     addButton.style.display = "none";
+    project.style.borderBottom = "none";
     form.reset();
   });
 
@@ -113,8 +116,10 @@ function displayTodoContainer() {
   todoTitle.addEventListener("input", () => {
     if (todoTitle.value.trim()) {
       addButton.style.display = "block";
+      todoTitle.style.borderBottom = "1px solid black";
     } else {
       addButton.style.display = "none";
+      todoTitle.style.borderBottom = "none";
     }
   });
 
@@ -136,6 +141,7 @@ function displayTodoContainer() {
 
     addToTodoList(title, status);
     addButton.style.display = "none";
+    todoTitle.style.borderBottom = "none";
     form.reset();
   });
   return todoContainer;
