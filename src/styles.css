@@ -171,3 +171,28 @@ form > button,
 .checkbox-wrapper-62 .check:checked + label svg g path {
   stroke-dashoffset: 0;
 }
+
+.all-button,
+.today-button,
+.project-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.all-button::after,
+.today-button::after,
+.project-button::after {
+  content: url("./assets/star.svg"); /* Path to your star icon */
+  display: none; /* Hidden by default */
+  margin-left: 8px;
+}
+
+.all-button:hover::after,
+.today-button:hover::after,
+.project-button:hover::after,
+.all-button.active::after,
+.today-button.active::after,
+.project-button.active::after {
+  display: inline; /* Show on hover or when active */
+}

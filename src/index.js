@@ -18,6 +18,15 @@ function addToTodoList(title, status = false) {
   displayTodo();
 }
 
+function setActiveButton(button) {
+  document
+    .querySelectorAll(".all-button, .today-button, .project-button")
+    .forEach((btn) => {
+      btn.classList.remove("active");
+    });
+  button.classList.add("active");
+}
+
 function displayNav() {
   const nav = document.createElement("nav");
   const projectsContainer = document.createElement("div");
@@ -26,13 +35,17 @@ function displayNav() {
   todoAll.className = "all-button";
   todoAll.textContent = "All tasks";
 
-  todoAll.addEventListener("click", displayAllTodo);
+  todoAll.addEventListener("click", () => {
+    setActiveButton(todoAll);
+    displayAllTodo();
+  });
 
   const todoToday = document.createElement("button");
-  todoToday.className = "today-button";
+  todoToday.className = "today-button active";
   todoToday.textContent = "Today's tasks";
 
   todoToday.addEventListener("click", () => {
+    setActiveButton(todoToday);
     currentProject = "Today";
     displayTodo();
   });
@@ -106,6 +119,7 @@ function createProjectButton(projectName) {
   });
 
   projectButton.addEventListener("click", () => {
+    setActiveButton(projectButton);
     currentProject = projectName;
     displayTodo();
   });
@@ -129,7 +143,6 @@ function createProjectButton(projectName) {
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  // return string.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 function displayTodoContainer() {
@@ -181,6 +194,7 @@ function displayTodoContainer() {
     todoTitle.style.borderBottom = "none";
     form.reset();
   });
+
   return todoContainer;
 }
 
@@ -195,10 +209,6 @@ function displayTodo() {
   projects[currentProject].forEach((todo, index) => {
     const div = document.createElement("div");
     div.className = "todo";
-
-    // const checkbox = document.createElement("input");
-    // checkbox.type = "checkbox";
-    // checkbox.checked = todo.status;
 
     const checkboxWrapper = document.createElement("div");
     checkboxWrapper.className = "checkbox-wrapper-62";
