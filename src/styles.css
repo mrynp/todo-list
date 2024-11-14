@@ -21,18 +21,59 @@ nav {
   background-color: rgba(255, 253, 119, 0.2);
   background-blend-mode: multiply;
   height: 70vh;
-  width: 300px;
-  /* border: 1px solid #000; */
+  min-width: 300px;
   padding: 40px 20px;
   margin: 40px 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
     rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.sticky-note-button {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 253, 119, 0.2);
+  background-image: url("./assets/texture.jpg");
+  background-size: contain;
+  background-position: center;
+  background-blend-mode: multiply;
+  font-size: 24px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+@media (max-width: 700px) {
+  .sticky-note-button {
+    display: flex;
+  }
+
+  nav {
+    display: none;
+    position: fixed;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    width: 80%;
+    max-width: 400px;
+    /* height: auto; */
+    z-index: 2;
+    /* transition: opacity 0.3s ease, visibility 0.3s ease; */
+  }
+
+  nav.show {
+    display: flex;
+  }
 }
 
 nav > div {
@@ -183,8 +224,8 @@ form > button,
 .all-button::after,
 .today-button::after,
 .project-button::after {
-  content: url("./assets/star.svg"); /* Path to your star icon */
-  display: none; /* Hidden by default */
+  content: url("./assets/star.svg");
+  display: none;
   margin-left: 8px;
 }
 
@@ -194,5 +235,5 @@ form > button,
 .all-button.active::after,
 .today-button.active::after,
 .project-button.active::after {
-  display: inline; /* Show on hover or when active */
+  display: inline;
 }

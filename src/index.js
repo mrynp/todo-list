@@ -27,6 +27,47 @@ function setActiveButton(button) {
   button.classList.add("active");
 }
 
+function displayHamburger() {
+  const stickyNoteButton = document.createElement("div");
+  stickyNoteButton.className = "sticky-note-button";
+  stickyNoteButton.textContent = "☰";
+
+  const nav = document.querySelector("nav");
+
+  stickyNoteButton.addEventListener("click", () => {
+    nav.classList.toggle("show");
+  });
+
+  document.body.appendChild(stickyNoteButton);
+
+  // nav.querySelectorAll("button").forEach((button) => {
+  //   button.addEventListener("click", () => {
+  //     nav.classList.remove("show");
+  //   });
+  // });
+
+  nav
+    .querySelectorAll(".all-button, .today-button, .project-button")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        nav.classList.remove("show");
+      });
+    });
+
+  // document
+  //   .querySelectorAll(".all-button, .today-button, .project-button")
+  //   .forEach((btn) => {
+  //     btn.classList.remove("show");
+  //   });
+
+  // Automatically hide nav when resizing below 700px
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) {
+      nav.classList.remove("show");
+    }
+  });
+}
+
 function displayNav() {
   const nav = document.createElement("nav");
   const projectsContainer = document.createElement("div");
@@ -98,6 +139,7 @@ function displayNav() {
 }
 
 function createProjectButton(projectName) {
+  const nav = document.querySelector("nav");
   const projectContainer = document.createElement("div");
   projectContainer.className = "project-container";
 
@@ -119,6 +161,7 @@ function createProjectButton(projectName) {
   });
 
   projectButton.addEventListener("click", () => {
+    nav.classList.remove("show");
     setActiveButton(projectButton);
     currentProject = projectName;
     displayTodo();
@@ -135,6 +178,8 @@ function createProjectButton(projectName) {
     projectContainer.remove();
   });
 
+  currentProject = projectName;
+  displayTodo();
   projectContainer.appendChild(projectButton);
   projectContainer.appendChild(deleteBtn);
 
@@ -350,6 +395,7 @@ function displayTodoApp() {
 
   document.body.appendChild(main);
 
+  displayHamburger();
   displayTodoContainer();
 }
 
