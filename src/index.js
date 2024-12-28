@@ -40,12 +40,6 @@ function displayHamburger() {
 
   document.body.appendChild(stickyNoteButton);
 
-  // nav.querySelectorAll("button").forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     nav.classList.remove("show");
-  //   });
-  // });
-
   nav
     .querySelectorAll(".all-button, .today-button, .project-button")
     .forEach((button) => {
@@ -83,7 +77,7 @@ function displayNav() {
 
   const todoToday = document.createElement("button");
   todoToday.className = "today-button active";
-  todoToday.textContent = "Today's tasks";
+  todoToday.textContent = "Today";
 
   todoToday.addEventListener("click", () => {
     setActiveButton(todoToday);
@@ -95,7 +89,7 @@ function displayNav() {
   const project = document.createElement("input");
   project.type = "text";
   project.name = "project";
-  project.placeholder = "+ New Project";
+  project.placeholder = "+ New List";
   project.required = true;
 
   const addButton = document.createElement("button");
@@ -247,7 +241,7 @@ function displayTodo() {
   const todoListContainer = document.querySelector(".todo-list-container");
   const todoHeader = document.querySelector(".todo-container h1");
 
-  todoHeader.textContent = `${currentProject} Todo List`;
+  todoHeader.textContent = currentProject;
 
   todoListContainer.innerHTML = "";
 
@@ -307,7 +301,7 @@ function displayAllTodo() {
   const todoListContainer = document.querySelector(".todo-list-container");
   const todoHeader = document.querySelector(".todo-container h1");
 
-  todoHeader.textContent = "All Todos";
+  todoHeader.textContent = "All Tasks";
 
   todoListContainer.innerHTML = "";
 
